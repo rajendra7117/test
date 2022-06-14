@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { MdOutlinePermContactCalendar, MdDelete } from "react-icons/md";
+import React, { useState, useEffect, memo } from "react";
+import { MdOutlinePermContactCalendar } from "react-icons/md";
 import { users } from "../../lib/users";
 import useInput from "../../hooks/UseInput";
 import { tasksSliceActions } from "../../store/tasksSlice";
@@ -8,6 +8,7 @@ import "./TaskForm.css";
 
 import InputField from "./InputField";
 import DeleteTaskModal from "./DeleteTaskModal";
+import DeleteButton from "./DeleteButton";
 const TaskForm = ({ toggleForm }) => {
   const editingTask = useSelector((state) => state.tasks.editingTask);
  
@@ -94,11 +95,7 @@ const TaskForm = ({ toggleForm }) => {
   };
 
 
-  const deleteTask = (e) => {
-    e.preventDefault()
-    console.log('delete')
-      dispatch(tasksSliceActions.displayModal())
-  };
+ 
 
   useEffect(() => {
     setErrorState(false);
@@ -152,7 +149,7 @@ const TaskForm = ({ toggleForm }) => {
           <InputField
             label="Time"
             type="Time"
-            placeholder={"Pick time"}
+            placeholder={"Time"}
             onChange={timeInputHandler}
             onBlur={timeInputBlurHandler}
             hasError={timeInputHasError}
@@ -178,6 +175,7 @@ const TaskForm = ({ toggleForm }) => {
             <h5>This field should not be empty</h5>
           </span>
         </div>
+        <div className="sec-3">
         {errorState && (
           <div className="error-div">
             <span>
@@ -185,15 +183,13 @@ const TaskForm = ({ toggleForm }) => {
             </span>
           </div>
         )}
-        {isEditing && (
-          <button className="delete-button" onClick={deleteTask}>
-            <MdDelete />
-          </button>
-        )}
+        {isEditing && (<DeleteButton />)}
         <div className="buttons-div">
           <button onClick={cancelForm}>Cancel</button>
           <button>Save</button>
         </div>
+        </div>
+       
         {showModal &&  <DeleteTaskModal />}
        
       </form>
@@ -201,4 +197,4 @@ const TaskForm = ({ toggleForm }) => {
   );
 };
 
-export default TaskForm;
+export default memo(TaskForm);

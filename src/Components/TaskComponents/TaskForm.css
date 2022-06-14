@@ -1,3 +1,7 @@
+:root{
+    --error-color: rgb(230, 53, 53);
+}
+
 .task-form{
     width: 23rem;
     height: auto;
@@ -5,6 +9,7 @@
     flex-direction: column;
    font-family: inherit;
    font-weight: 600;
+    border-top: 1px solid rgb(237,247,252);
 
     
 }
@@ -14,13 +19,14 @@
     width: 100%;
     height: auto;
     opacity: 1;
-    padding: 1.2rem 0;
+    padding: 0.5rem 0 1.2rem 0;
     background-color:rgb(237,247,252);
 
 
     position: relative;
     animation: slide 0.5s ease-in-out;
     z-index: 1;
+   
 
 }
 
@@ -65,7 +71,9 @@
     padding-left: 1rem;
     font-family: inherit;
     font-weight: 600;
+    outline: none;
 }
+
 .date-time{
     width: 100%;
     display: flex;
@@ -84,11 +92,14 @@
 }
 .date-time .input-div input{
     padding-left: 1.8rem;
+    font-weight: 600;
 }
 .date-time .input-div input::-webkit-calendar-picker-indicator {
   position: absolute;
   left: 0.7rem;
 }
+
+
 .svg-div{
     position: absolute;
     right: 0.2rem;
@@ -103,7 +114,7 @@
     font-size: 20px;
 }
 .buttons-div{
-    width: 10rem;
+    width: 8rem;
     display: flex;
    margin-left: auto;
    margin-right: 0.8rem;
@@ -131,10 +142,18 @@
     border: none;
   
 }
+.sec-3{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+}
 .error-msg{
     display: none;
     font-size: 12px;
-    color: red;
+    color: var(--error-color);
     margin: 0;
 }
 .error-msg h5{
@@ -143,31 +162,44 @@
     margin-left: 0.2rem;
    
 }
-.error input{
-    border: 1px solid red;
-}
+
 .error .error-msg{
     display: block;
  
+
    
+}
+.error select{
+    border: 1px solid var(--error-color);
+}
+
+.error input{
+    border: 1px solid var(--error-color);
 }
 .error-div{
     width: 10rem;
     position: absolute;
-    bottom: 0.1rem;
-    left: 2rem;
+    top: 1.6rem;
+    left: 4.3rem;
 
 }
 .error-div span h4{
     margin: 0;
     margin-left: 0.2rem;
     margin-bottom: 0.1rem;
-    font-size: 15px !important;
+    font-size: 13px !important;
     font-family: inherit !important;
-    color: red;
+    color: var(--error-color);
 
 }
 
+.delete-button-div{
+    position: relative;
+    width: 3rem;
+    height: 3rem;
+    margin-left: 2.2rem;
+    margin-top: 1rem;
+}
 .delete-button{
     position: absolute;
     left: 0.5rem;
@@ -175,9 +207,25 @@
     border: none;
     background-color: rgb(237,247,252);
     cursor: pointer;
+    font-size: 1rem;
 }
 .delete-button svg{
     font-size: 1.1rem;
+}
+.delete-button-div .tool-tip{
+    width: 9rem !important;
+    position: absolute;
+    left: -3rem;
+    top: -1.4rem;
+}
+
+.delete-button-div .tool-tip div span{
+    width: 9rem !important;
+}
+.delete-button-div .tool-tip svg{
+    top: 0;
+    top: 0.9rem;
+    left: 3.8rem;
 }
 .delete-modal{
     width: 28rem;
@@ -204,16 +252,52 @@
     cursor: pointer;
 }
 
-/* .date-error input{
-    border: 1px solid red;
-}
-.date-error .error-msg{
-    display: block;
+
+
+
+
+.delete-button-div button::before{
+    content: attr(data-tooltip);
+    background-color: #333;
+    padding: 0.2rem;
+    border-radius: 0.2rem;
+    color: #fff;
+    width: max-content;
+    font-family: inherit !important;
+    --translate-y: -100%;
+    font-size: 13px !important;
+    font-weight: 600;
+    
 }
 
-.time-error .error-msg{
-    display: block; */
-/* } */
+.delete-button-div button::after{
+    content: '';
+    border: 7px solid transparent;;
+    border-top-color: #333;
+    --scale: 0;
+    transform: translateY(-200px);
+    --translate-y: 0;
+    transform-origin: top center !important;
+    
+}
+
+.delete-button-div button::before,
+.delete-button-div button::after{
+    position: absolute;
+    top: -1rem;
+    left: 50%;
+    --scale: 0 !important;
+     transform: translateX(-50%) translateY(var(--translate-y, 0)) scale(var(--scale));
+     transition: all 0.3s ease-in;
+     transform-origin: bottom center;
+}
+
+
+.delete-button-div button:hover::before,
+.delete-button-div button:hover::after{
+  --scale: 1 !important;
+}
+
 @keyframes slide {
     from{
         transform: translateY(-30px);
@@ -227,5 +311,11 @@ transform: translateY(0);
 z-index: 1;
 
       
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .task-form{
+        width: 21rem;
     }
 }

@@ -1,0 +1,35 @@
+.task .tool-tip{
+    position: absolute;
+    z-index: 1;
+    top: -1.5rem;
+    width: auto;
+   
+   
+}
+.task .tool-tip div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    width: auto;
+   
+
+}
+.tool-tip span{
+    background-color: gainsboro;
+    margin: 0;
+    font-weight: 600;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 0.3rem;
+    border-radius: 0.2rem;
+    width: 8rem;
+}
+.tool-tip svg{
+    margin: 0;
+    position: absolute;
+    bottom: -12px;
+    left: 2.7rem;
+    color: gainsboro;
+    font-size: 20px;
+}
